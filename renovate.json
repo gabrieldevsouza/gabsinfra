@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabledManagers": ["docker-compose"],
+  "includePaths": ["inventory/whoami/compose.yaml"],
+  "automerge": false,
+  "platformAutomerge": false,
+  "dependencyDashboard": true,
+  "dependencyDashboardAutoclose": false,
+  "ignoreScripts": true,
+  "packageRules": [
+    {
+      "matchPackageNames": ["*"],
+      "enabled": false
+    },
+    {
+      "matchManagers": ["docker-compose"],
+      "matchPackageNames": ["traefik/whoami"],
+      "enabled": true,
+      "pinDigests": true,
+      "allowedVersions": "/^v[0-9]+\\.[0-9]+\\.[0-9]+$/"
+    }
+  ]
+}
