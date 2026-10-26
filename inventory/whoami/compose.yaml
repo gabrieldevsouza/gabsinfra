@@ -1,5 +1,23 @@
-# Inventário de atualização. Não é a configuração de deployment.
-# Não aplicar este arquivo no Portainer ou com docker compose.
 services:
   whoami:
     image: traefik/whoami:v1.12.0@sha256:c4717a8d1f0134a7444e24f881160e033991f23027c6c5a9a3f8fd22e70d1d44
+    container_name: whoami
+    restart: unless-stopped
+    ports:
+      - "192.168.15.8:8001:80"
+    labels:
+      com.centurylinklabs.watchtower.enable: "false"
+      wud.watch: "true"
+      wud.watch.digest: "true"
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
